@@ -1,0 +1,91 @@
+Print the second line twice.
+
+sed '2p' file.txt
+
+Print the line 7
+
+sed -n '7p' file.txt
+
+Display specific lines
+
+sed -n '14,$p' file2.txt
+sed -n '9,11p' file2.txt
+
+Do not display specfic lines
+sed -n '2!p' file2.txt
+
+dont display multiply lines 
+sed -n '2,11!p' file2.txt
+
+Display lines having specific word
+
+sed -n '/ame/p' file1.txt
+
+Display lines having specific word without case
+
+sed -n '/[Aa]me/' file1.txt
+
+Search lines and store it to a file
+
+sed -n '/F/w sed-result.txt' file1.txt
+
+Search and replace
+
+sed 's/-666-/-555/' file.txt
+
+multiple fields in one command
+
+sed -e 's/666/555/' -e 's/f/F/'  file.txt
+
+Replace data with matching
+
+sed '/hotmail.com/s/Ahsan/Anthony/' file.txt
+
+Delete a line
+
+sed '/Anthony/d' file.txt
+sed '/[Aa]nthony/d' file.txt
+
+ 's/teh/the' filename
+
+for case sensitivity
+
+sed 's/teh/the/i' filename
+
+capturing the case before replacing
+
+\1 acts as a variable and act as a placeholer for \(t\)
+
+sed 's/\(t\)eh/\1he/i' file.txt
+
+To chnage the all occurences
+
+sed 's/\(t\)eh/\1he/ig' file.txt
+
+make sure one word teh changes we use \b 
+
+sed 's/\b\(t\)eh\b/\1he/ig' file.txt
+
+To remove the duplicate word
+
+sed s'/\(\b\w+\b\) \1 /\1/'ig file2.txt
+
+Remove the empty lines
+
+sed '/^$/d' filename
+
+Remove the empty lines and whitespaces
+
+sed '/^ *$/d' filename
+
+remove the empty lines including the tabs
+
+sed '/^\t*$/d' filename
+
+Remove empty lines, lines with tabs
+
+sed '/^\( \|\t)\*$/'d filename
+
+
+
+
