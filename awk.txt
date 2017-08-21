@@ -1,0 +1,87 @@
+Field separator
+
+awk -F , '{print $,$2  }' sample2.csv
+awk '{print $1,$2}' FS=, sample2.csv 
+
+Display content without displaying header
+
+awk 'NR!=1{print $0)}' file1.txt
+awk 'NR>1{print -bash}' file1.txt
+ 
+Saving result of awk commands 
+ 
+row data filtering 
+
+awk -F , '$1==1000{print $1,$2}' sample.csv
+awk -F "," '$2=="Computer Printout Paper with Letter-Trim Perforations"{print $2}' sample.csv 
+awk -F "," '$2=="Computer Printout Paper with Letter-Trim Perforations"{print $2}' sample.csv 
+awk -F "," '$1>=3000{print $1,$2}' sample.csv  
+
+Filter row data with logical OR
+
+awk '$4=="A" || "R"{print $1,$2,$3}' file1.txt | wc -l
+awk '$4=="A" || "R"{print $1,$2,$3}' file1.txt
+awk '$1=="Julie" || $4=="F"{print $1,$2}' file1.txt
+
+Filter row data with logical AND
+display whne both teh records are same
+
+awk '$1=="Julie" && $4=="F"{print $2,$3}' file1.txt
+ps -ef | awk '$1==0 && $2>1000 {print $8}'
+ps -ef | awk '$1==0 || $2>1000 {print $8}'
+
+Display where we have specfic string in the row
+
+awk '/com/{print $0}' file1.txt
+awk '/hotmail/ || /gmail/{print $0}' file1.txt
+Not
+awk '!/hotmail/ || /gmail/{print $0}' file1.txt
+
+Display where we have specfic string in the row and specfic column
+
+awk '$3~/gmail/{print $0}' file1.txt
+Not
+awk '$3!~/gmail/{print $0}' file1.txt
+
+Find the text at the start of line
+awk '$1~/^A/{print $1}' file1.txt
+
+Find the text at the end of line
+awk '$1~/l$/{print $1}' file1.txt
+awk '$1~/^B/ && $1~/l$/{print $1}' file1.txt starts with cap B and ends in l
+
+conditional check using if
+
+awk '{if ($5>500) print $0;}' file2.txt
+awk '{if ($5>500 && $5<600) print $0;}' file2.txt
+
+if and else
+
+awk '{if ($1~/B/) print $0; else print "*****";}' file1.txt
+awk '{if ($1~/B/) print $0; else print "No match";}' file1.txt
+
+awk 'NR!=1{if ($5>400 && $5< 500) print$0  " your tax in 20%"; else if($5>500) print$0 " your tax is 30%"; else print$0 " your tax is 10%";}' file2.txt
+
+
+replace root to Superuser
+
+ps aux > process.txt
+awk '{if ($1=="root")  print" Superuser" $0; }' process.txt
+
+
+BEGINE BLOCK
+
+awk 'BEGIN{ print "Display records with salary" }{if($5>500) print$0 " salary_greater_than_400"}' file2.txt
+awk 'BEGIN{Salary=2 }{if($5>500){$6=$5*2; print$6 }}' file2.txt
+
+END Block
+
+awk 'BEGIN {print "total SUM"}{if($5>500) print $0; }END{print "task completed"}' file2.txt
+awk 'BEGIN {print "total count", count=0 }{if($5>500) print $0;count=count +1; }END{print"total" count}' file2.txt
+
+For loop
+
+awk '{for (i=1;i<=2;i++) { print $0}} ' file1.txt
+awk 'BEGIN{print "name, phone ,email"}NR!=1{for (i=1;i<=3;i++) { print $i}} ' file1.txt
+
+
